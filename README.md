@@ -27,3 +27,10 @@
 ### Importing data into MongoDB
 
 mongoimport -d australian_disability --collection nsw_data_2012 --file nsw_disability_2012_data.csv --type csv --headerline
+
+### Running FLASK
+
+- May have to set the environment variables using and then run
+  export FLASK_APP=app
+  export FLASK_ENV=development
+  flask run
