@@ -19,17 +19,18 @@ db.list_collection_names()
 app = Flask(__name__)
 
 # Get the data for NSW for a given year
-@app.route("/year/2012",  methods=['GET'])
+@app.route("/year",  methods=['GET'])
 def get_for_year():
-    collection_name = 'nsw_data_2012'
+    year = request.args.get('year')
+    collection_name = 'nsw_data_' + year
     collection = db.get_collection(collection_name)
     df = pd.DataFrame(list(collection.find()))
-    print(df)
+    df.sort_values(by=['Age group (years)'], inplace=True)
     fig = px.bar(df, x="Age group (years)", y="All persons")
     graphJSON = json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
-    header= "All persons in NSW in the year 2012 with a disability"
-    description = "All persons that live in NSW that are male or female and have a disability for the year 2012"
-    return render_template('notdash2.html', graphJSON=graphJSON, header=header,description=description)
+    header= 'All persons in NSW in the year ' + str(year) + ' with a disability'
+    description = 'All persons that live in NSW that are male or female and have a disability for the year ' + str(year)
+    return render_template('barchart.html', graphJSON=graphJSON, header=header,description=description)
 
 @app.route('/', methods=('GET', 'POST'))
 def index():

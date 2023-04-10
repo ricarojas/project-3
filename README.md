@@ -33,4 +33,4 @@ mongoimport -d australian_disability --collection nsw_data_2012 --file nsw_disab
 - May have to set the environment variables using and then run
   export FLASK_APP=app
   export FLASK_ENV=development
-  flask run
+  flask run --port 8000
