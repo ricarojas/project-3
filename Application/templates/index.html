@@ -5,8 +5,8 @@
     <title>Project 3 - Prevelance of Disabilities in Australia</title>
 </head>
 <body>
-    <h3>Generate a bar chart for the chosen options</h3>
     <div class="container">
+    <h3>Generate a bar chart for the chosen options</h3>
     <div class="singular_form" id="singular_form">
     <form action="{{ url_for('generate_bar_chart')}}" method="GET">
         <div class="options">
@@ -96,6 +96,26 @@
         <input type="radio" id="compare_radio" name="toggle_comparison" value="2">
         <label for="compare">Comparison</label>
     </div>
+    <form action="{{ url_for('generate_line_chart')}}" method="GET">
+        <h3>Generate a line chart for the states</h3>
+        <p>Select a year to plot</p>
+        <input type="radio" id="year_radio" name="year_radio" value="2012" checked>
+        <label for="compare">2012</label>
+        <input type="radio" id="year_radio" name="year_radio" value="2015">
+        <label for="compare">2015</label>
+        <input type="radio" id="year_radio" name="year_radio" value="2018">
+        <label for="compare">2018</label>
+        <p>Select a gender</p>
+        <input type="radio" id="gender_radio" name="gender_radio" value="Males" checked>
+        <label for="compare">Males</label>
+        <input type="radio" id="gender_radio" name="gender_radio" value="Females">
+        <label for="compare">Females</label>
+        <input type="radio" id="gender_radio" name="gender_radio" value="All persons">
+        <label for="compare">All persons</label>
+        <div class="buttons">
+            <button type="submit" class="btn btn-default">Generate</button>
+        </div>
+    </form>
     </div>
 </body>
 <script>

@@ -94,18 +94,30 @@ def generate_vs_bar_chart():
     return render_template('barchart.html', graphJSON=graphJSON, header=header,description=description)
         
 
-@app.route("/comparison",  methods=['GET'])
-def generate_comparison_bar_chart():
-    gender = request.args.get('gender')
+@app.route("/line",  methods=['GET'])
+def generate_line_chart():
+    # Get all the variables from the query
+    year = request.args.get('year_radio')
+    gender = request.args.get('gender_radio')
+    # Set up the collection
     collection_name = 'state_and_year'
     collection = db.get_collection(collection_name)
+    # Set up the dataframe
     df = pd.DataFrame(list(collection.find()))
     df.sort_values(by=['Age group (years)'], inplace=True)
-    fig = px.bar(df, x="Age group (years)", y="All persons", color="State")
+
+    # Remove total line as it is not relevant for this chart.
+    df = df.loc[df['Age group (years)'] != 'Total']
+    df = df.loc[df['Year'] == int(year)]
+    print(df)
+
+    fig = px.line(df, x="Age group (years)", y=gender, color="State")
     graphJSON = json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
-    header= 'People in Australia who identify as ' + str(sex) + ' with a disability'
-    description = 'People in Australia who identify as ' + str(sex) + 'and have a disability for the year '
-    return render_template('barchart.html', graphJSON=graphJSON, header=header,description=description)
+
+    header = 'Disability count for ' + str(gender) + ' in year ' + str(year)
+    description = 'Line chart showing the change between age groups of people with a disability in Australia who identify as ' + str(gender) + ' in year ' + str(year) 
+
+    return render_template('linechart.html', graphJSON=graphJSON, header=header,description=description)
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
