@@ -10,16 +10,14 @@
     <div class="singular_form" id="singular_form">
     <form action="{{ url_for('generate_bar_chart')}}" method="GET">
         <div class="options">
-            <label for="year">Choose a year : </label>
-            <select class="select" name="year" id="year" class="form-control">
-                <option value="all">All years</option>
+            <label class="select" for="year">Choose a year : </label>
+            <select name="year" id="year" class="form-control">
                 <option value="2012">2012</option>
                 <option value="2015">2015</option>
                 <option value="2018">2018</option>
             </select>
             <label class="select" for="state"> Choose a state : </label>
             <select name="state" id="state" class="form-control">
-                <option value="all">All states</option>
                 <option value="NSW">NSW</option>
                 <option value="QLD">QLD</option>
                 <option value="SA">SA</option>
@@ -39,8 +37,61 @@
         </div>
     </form>
     </div>
+    <div class="comparison_form" id="comparison_form">
+        <form action="{{ url_for('generate_vs_bar_chart')}}" method="GET">
+            <div class="options">
+                <label class="select" for="year1">Choose a year : </label>
+                <select name="year1" id="year1" class="form-control">
+                    <option value="2012">2012</option>
+                    <option value="2015">2015</option>
+                    <option value="2018">2018</option>
+                </select>
+                <label class="select" for="state1"> Choose a state : </label>
+                <select name="state1" id="state1" class="form-control">
+                    <option value="NSW">NSW</option>
+                    <option value="QLD">QLD</option>
+                    <option value="SA">SA</option>
+                    <option value="TAS">TAS</option>
+                    <option value="VIC">VIC</option>
+                    <option value="WA">WA</option>
+                </select>
+                <label class="select" for="gender1"> Choose a gender : </label>
+                <select name="gender1" id="gender1" class="form-control">
+                    <option value="All persons">All</option>
+                    <option value="Females">Females</option>
+                    <option value="Males">Males</option>
+                </select>
+            </div>
+            <div class="options">
+                <label class="select" for="year2">Choose a year : </label>
+                <select name="year2" id="year2" class="form-control">
+                    <option value="2012">2012</option>
+                    <option value="2015">2015</option>
+                    <option value="2018">2018</option>
+                </select>
+                <label class="select" for="state2"> Choose a state : </label>
+                <select name="state2" id="state2" class="form-control">
+                    <option value="NSW">NSW</option>
+                    <option value="QLD">QLD</option>
+                    <option value="SA">SA</option>
+                    <option value="TAS">TAS</option>
+                    <option value="VIC">VIC</option>
+                    <option value="WA">WA</option>
+                </select>
+                <label class="select" for="gender2"> Choose a gender : </label>
+                <select name="gender2" id="gender2" class="form-control">
+                    <option value="All persons">All</option>
+                    <option value="Females">Females</option>
+                    <option value="Males">Males</option>
+                </select>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-default">Generate</button>
+            </div>
+        </form>
+        </div>
     <div class="buttons">
-        <input type="radio" id="compare_radio" name="toggle_comparison" value="1">
+        <input type="radio" id="compare_radio" name="toggle_comparison" value="1" checked>
         <label for="compare">Singular</label>
         <input type="radio" id="compare_radio" name="toggle_comparison" value="2">
         <label for="compare">Comparison</label>
@@ -55,8 +106,14 @@
       var item = event.target.value;
       if (item === '1'){
         singular_form.style.visibility = 'visible'
+        comparison_form.style.visibility = 'hidden'
+        comparison_form.style.display = 'none'
+        singular_form.style.display = 'flex'
       } else if ( item === '2')  {
         singular_form.style.visibility = 'hidden'
+        comparison_form.style.visibility = 'visible'
+        comparison_form.style.display = 'flex'
+        singular_form.style.display = 'none'
       }
       
     });
@@ -78,6 +135,14 @@
     }
     .select {
         padding-left: 8px;
+    }
+    .comparison_form {
+        visibility: hidden;
+        display: none;
+    }
+    .singular_form {
+        visibility: visible;
+        display: flex;
     }
 </style>
 </html>
