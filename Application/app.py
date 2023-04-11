@@ -55,6 +55,9 @@ def generate_vs_bar_chart():
     gender2 = request.args.get('gender2')
     state2 = request.args.get('state2')
 
+    # Define the default colour option
+    colors = "Gender"
+
     collection_name = 'state_and_year'
     collection = db.get_collection(collection_name)
     df = pd.DataFrame(list(collection.find()))
@@ -77,13 +80,13 @@ def generate_vs_bar_chart():
     # Sort the values of the two dataframes.
     df1_gender.sort_values(by=['Age group (years)'], inplace=True)
     df2_gender.sort_values(by=['Age group (years)'], inplace=True)
-
+    if gender1 ==  gender2:
+        colors = "State"
     # Merge the two dataframes
     frames = [df1_gender, df2_gender]
     result = pd.concat(frames)
-    print(result)
     # Create 
-    fig = px.bar(result, x="Age group (years)", y="Count", color="Gender")
+    fig = px.bar(result, x="Age group (years)", y="Count", color=colors)
     graphJSON = json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
     description = 'People of gender ' + str(gender1) + ' in ' + str(state1) + ' in the year ' + str(year1) + ' compared to People of gender ' + str(gender2) + ' in ' + str(state2) + ' in the year ' + str(year2)
     header = str(gender1) + ' ' + str(state1) + ' ' + str (year1) + ' compared to ' + str(gender2) + ' ' + str(state2) + ' ' + str (year2)
