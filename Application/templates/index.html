@@ -5,30 +5,79 @@
     <title>Project 3 - Prevelance of Disabilities in NSW</title>
 </head>
 <body>
-    <div class="options"></div>
-    <form action="{{ url_for('get_for_year')}}" method="GET">
-    <label for="year">Choose a year:</label>
-    <select name="year" id="year" class="form-control">
-        <option value="2012">2012</option>
-        <option value="2015">2015</option>
-        <option value="2018">2018</option>
-    </select>
-    <button type="submit" class="btn btn-default">Go</button>
-    </form> 
-    <label for="state">Choose a state:</label>
-    <select name="state" id="state">
-        <option value="nsw">NSW</option>
-        <option value="wa">WA</option>
-        <option value="act">ACT</option>
-    </select>
-    <h1><a href="year/2012">2012</a></h1>
-    <h1><a href="year/2015">2015</a></h1>
-    <h1><a href="year/2018">2018</a></h1>
+    <h3>Generate a bar chart for the chosen options</h3>
+    <div class="container">
+    <div class="singular_form" id="singular_form">
+    <form action="{{ url_for('generate_bar_chart')}}" method="GET">
+        <div class="options">
+            <label for="year">Choose a year : </label>
+            <select class="select" name="year" id="year" class="form-control">
+                <option value="all">All years</option>
+                <option value="2012">2012</option>
+                <option value="2015">2015</option>
+                <option value="2018">2018</option>
+            </select>
+            <label class="select" for="state"> Choose a state : </label>
+            <select name="state" id="state" class="form-control">
+                <option value="all">All states</option>
+                <option value="NSW">NSW</option>
+                <option value="QLD">QLD</option>
+                <option value="SA">SA</option>
+                <option value="TAS">TAS</option>
+                <option value="VIC">VIC</option>
+                <option value="WA">WA</option>
+            </select>
+            <label class="select" for="gender"> Choose a gender : </label>
+            <select name="gender" id="gender" class="form-control">
+                <option value="All persons">All</option>
+                <option value="Females">Females</option>
+                <option value="Males">Males</option>
+            </select>
+        </div>
+        <div class="buttons">
+            <button type="submit" class="btn btn-default">Generate</button>
+        </div>
+    </form>
+    </div>
+    <div class="buttons">
+        <input type="radio" id="compare_radio" name="toggle_comparison" value="1">
+        <label for="compare">Singular</label>
+        <input type="radio" id="compare_radio" name="toggle_comparison" value="2">
+        <label for="compare">Comparison</label>
+    </div>
+    </div>
 </body>
+<script>
+    // Get the value of the radio input to toggle a comparison between two data sets or show singular.
+    var singular_form = document.getElementById('singular_form')
+    document.querySelectorAll('input[name="toggle_comparison"]').forEach((elem) => {
+    elem.addEventListener("change", function(event) {
+      var item = event.target.value;
+      if (item === '1'){
+        singular_form.style.visibility = 'visible'
+      } else if ( item === '2')  {
+        singular_form.style.visibility = 'hidden'
+      }
+      
+    });
+  });
+</script>
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
     .options {
         display: flex;
         flex-direction: row;
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        padding-top: 8px;
+    }
+    .select {
+        padding-left: 8px;
     }
 </style>
 </html>

@@ -26,7 +26,12 @@
 
 ### Importing data into MongoDB
 
-mongoimport -d australian_disability --collection nsw_data_2012 --file nsw_disability_2012_data.csv --type csv --headerline
+mongoimport -d australian_disability --collection state_and_year --file nsw_disability_data.csv --type csv --headerline
+mongoimport -d australian_disability --collection state_and_year --file vic_disability_data.csv --type csv --headerline
+mongoimport -d australian_disability --collection state_and_year --file qld_disability_data.csv --type csv --headerline
+mongoimport -d australian_disability --collection state_and_year --file sa_disability_data.csv --type csv --headerline
+mongoimport -d australian_disability --collection state_and_year --file wa_disability_data.csv --type csv --headerline
+mongoimport -d australian_disability --collection state_and_year --file tas_disability_data.csv --type csv --headerline
 
 ### Running FLASK
 
@@ -34,3 +39,9 @@ mongoimport -d australian_disability --collection nsw_data_2012 --file nsw_disab
   export FLASK_APP=app
   export FLASK_ENV=development
   flask run --port 8000
+
+### Challenges
+
+- The data from ABS needed to be massaged, remove logos and other lines that were not relevant.
+- No data for the Northern Territory.
+- Australian Captial Territory didn't have data in the same format with regards to the age brackets and gender.
