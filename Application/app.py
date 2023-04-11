@@ -28,6 +28,7 @@ def generate_bar_chart():
     collection_name = 'state_and_year'
     collection = db.get_collection(collection_name)
     df = pd.DataFrame(list(collection.find()))
+    df = df.loc[df['Age group (years)'] != 'Total']
     df = df.loc[df['Year'] == int(year)]
     df = df.loc[df['State'] == state]
 
@@ -61,6 +62,7 @@ def generate_vs_bar_chart():
     collection_name = 'state_and_year'
     collection = db.get_collection(collection_name)
     df = pd.DataFrame(list(collection.find()))
+    df = df.loc[df['Age group (years)'] != 'Total']
 
     # Set up the first dataframe.
     df1 = df.loc[df['Year'] == int(year1)]
