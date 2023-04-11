@@ -19,10 +19,17 @@
 ### Data Sources
 
 - https://www.abs.gov.au/statistics/health/disability/disability-ageing-and-carers-australia-summary-findings/latest-release#data-downloads
+- NSW : https://www.abs.gov.au/statistics/health/disability/disability-ageing-and-carers-australia-summary-findings/2018/44300do001_2018.xls
+- VIC : https://www.abs.gov.au/statistics/health/disability/disability-ageing-and-carers-australia-summary-findings/2018/44300do002_2018.xls
+- QLD : https://www.abs.gov.au/statistics/health/disability/disability-ageing-and-carers-australia-summary-findings/2018/44300do003_2018.xls
+- SA : https://www.abs.gov.au/statistics/health/disability/disability-ageing-and-carers-australia-summary-findings/2018/44300do004_2018.xls
+- WA : https://www.abs.gov.au/statistics/health/disability/disability-ageing-and-carers-australia-summary-findings/2018/44300do005_2018.xls
+- TAS : https://www.abs.gov.au/statistics/health/disability/disability-ageing-and-carers-australia-summary-findings/2018/44300do006_2018.xls
 
 ### Tools Used
 
-- MongoDb Compass : To help visualise data imported into the databse.
+- MongoDb Compass : To help visualise data imported into the databse
+- Numbers (Mac Excel Equivelant) : To help split out the tables
 
 ### Importing data into MongoDB
 
