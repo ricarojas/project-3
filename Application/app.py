@@ -32,8 +32,9 @@ def generate_bar_chart():
     df = df.loc[df['State'] == state]
 
     # Sort the values of the dataframe.
-
     df.sort_values(by=['Age group (years)'], inplace=True)
+
+    # Attempt to set dynamic headers based on input.
     if gender == 'All persons':
         description = 'All person that live in Australia that have a disablity for the year ' + str(year)
     else:
@@ -41,6 +42,7 @@ def generate_bar_chart():
     fig = px.bar(df, x="Age group (years)", y=gender, color="State")
     graphJSON = json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
     header= 'People in Australia in the year ' + str(year) + ' with a disability'
+    # Return the graph to our barchart template for rendering.
     return render_template('barchart.html', graphJSON=graphJSON, header=header,description=description)
 
 @app.route("/vs_bar",  methods=['GET'])
@@ -85,6 +87,7 @@ def generate_vs_bar_chart():
     graphJSON = json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
     description = 'People of gender ' + str(gender1) + ' in ' + str(state1) + ' in the year ' + str(year1) + ' compared to People of gender ' + str(gender2) + ' in ' + str(state2) + ' in the year ' + str(year2)
     header = str(gender1) + ' ' + str(state1) + ' ' + str (year1) + ' compared to ' + str(gender2) + ' ' + str(state2) + ' ' + str (year2)
+    # Return the graph to our barchart template for rendering.
     return render_template('barchart.html', graphJSON=graphJSON, header=header,description=description)
         
 
